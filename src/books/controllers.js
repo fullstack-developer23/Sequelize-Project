@@ -81,25 +81,22 @@ const deleteBookByTitle = async (req, res) => {
     }
   };
 
-  // const updateBookByTitle = async (req, res) => {
-  //   try {
+  const updateBookByTitle = async (req, res) => {
+    try {
 
-  //     await Book.update(
-  //     {
-  //       {
-  //         author: 
-  //       },
-  //       where: {
-  //         title: req.body.title,
-  //       }
-  //     });
+      // await Book.update({ author: req.body.author, genre: req.body.genre }, {
+        await Book.update({...req.body}, {
+        where: {
+          title: req.body.title,
+        },
+      });
       
-  //     return res.status(200).json({ message: "the book is updated."});
+      return res.status(200).json({ message: "the book is updated."});
       
-  //   } catch (error) {
-  //     return res.status(500).send(error.message);
-  //   }
-  // };
+    } catch (error) {
+      return res.status(500).send(error.message);
+    }
+  };
 
 module.exports = {
     addBook: addBook, 
@@ -108,4 +105,5 @@ module.exports = {
     getByAuthor: getByAuthor,
     deleteOneBook: deleteOneBook,
     deleteAllBooks: deleteAllBooks,
+    updateBookByTitle,
 };
